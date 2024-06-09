@@ -1,0 +1,115 @@
+<%- include("../layouts/header.ejs") %>
+
+<section class="vh-100">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card text-white" style="border-radius: 1rem; background-color: #0b0c10;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+              <% if (typeof message !== 'undefined') { %>
+                <p style="color: green;"><%= message %></p>
+              <% } %>
+
+              <form id="registrationForm" action="/register" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+
+                <div class="form-outline mb-4">
+                  <input type="text" name="name"  class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example1cg">Your Name</label>
+                  <p id="name-error" style="color: red;"></p>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="email" name="email"  class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example3cg">Your Email</label>
+                  <p id="email-error" style="color: red;"></p>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" name="mno"  class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example3cg">Your mobile number</label>
+                  <p id="mno-error" style="color: red;"></p>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="file" name="image"  class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example3cg">Your Image</label>
+                  <p id="image-error" style="color: red;"></p>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password" name="password"  class="form-control form-control-lg" />
+                  <label class="form-label" for="form3Example4cg">Password</label>
+                  <p id="password-error" style="color: red;"></p>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <input type="submit" value="Register" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" />
+                </div>
+
+                <p class="text-center text-white mt-5 mb-0">Have already an account? <a href="/login" class="fw-bold text-white"><u>Login here</u></a></p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function validateForm() {
+    var name = document.forms["registrationForm"]["name"].value;
+    var email = document.forms["registrationForm"]["email"].value;
+    var mno = document.forms["registrationForm"]["mno"].value;
+    var image = document.forms["registrationForm"]["image"].value;
+    var password = document.forms["registrationForm"]["password"].value;
+
+    // Reset previous error messages
+    document.getElementById('name-error').innerHTML = '';
+    document.getElementById('email-error').innerHTML = '';
+    document.getElementById('mno-error').innerHTML = '';
+    document.getElementById('image-error').innerHTML = '';
+    document.getElementById('password-error').innerHTML = '';
+
+    if (name === "") {
+      document.getElementById('name-error').innerHTML = 'Name cannot be empty';
+      return false;
+    }
+
+    if (email === "") {
+      document.getElementById('email-error').innerHTML = 'Email cannot be empty';
+      return false;
+    }
+
+    // Add additional validation for email format if needed
+
+    if (mno === "") {
+      document.getElementById('mno-error').innerHTML = 'Mobile number cannot be empty';
+      return false;
+    }
+
+    // Add additional validation for mobile number format if needed
+
+    if (image === "") {
+      document.getElementById('image-error').innerHTML = 'Image cannot be empty';
+      return false;
+    }
+
+    if (password === "") {
+      document.getElementById('password-error').innerHTML = 'Password cannot be empty';
+      return false;
+    }
+
+    // Additional validation logic as needed
+
+    // If all validation passes, the form will be submitted
+    return true;
+  }
+</script>
+
+<%- include("../layouts/footer.ejs") %>
